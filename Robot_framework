@@ -1,0 +1,24 @@
+import time
+from pywinauto.application import Application
+
+
+twsWin = Application(backend='uia').start(r"C:\Program Files (x86)\ICAP\ICAP TWS 5\ICAP TWS.exe")
+#twsWin["ICAP TWS"].print_control_identifiers()
+
+userName = twsWin["ICAP TWS"].child_window(auto_id="txtUserName", control_type="Edit").wrapper_object()
+userName.type_keys('sy000240')
+passWD = twsWin["ICAP TWS"].child_window(auto_id="txtPassword", control_type="Edit").wrapper_object()
+passWD.type_keys("123")
+loginBT = twsWin["ICAP TWS"].child_window(title="OK", auto_id="btnLogin", control_type="Button").wrapper_object()
+loginBT.click_input()
+
+NextWin = twsWin.top_window()
+NextWin.print_control_identifiers()
+
+time.sleep(10)
+#twsWin12Delay = Application(backend='uia').connect(title='ICAP TWS - [Connected Live - SNETQS146]')
+#twsWin12Delay["ICAP TWS - [Connected Live - SNETQS146]"].print_control_identifiers()
+#time.sleep(20)
+twsWin12DelayWinBT = twsWin["ICAP TWS - [Connected Live - SNETQS146]"].child_window(title="OK", control_type="Button").wrapper_object()
+
+twsWin12DelayWinBT.click_input()
